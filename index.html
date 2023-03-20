@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/cleaning-service.css">
+    <title>Cleaning Services</title>
+    <script src="./scripts/cleaning-service.js" defer></script>
+</head>
+<body>
+    <h1>Cleaning Services Platform</h1>
+    <section class="card">
+        <h2>Cleaning Products Cost Calculator</h2>
+        <div class="form">
+            <div class="form-section">
+                <label for="brand-options">Choose Brandname:</label>
+                <select name="brands" id="brand-options">
+                    <option value="tide">Tide</option>
+                    <option value="surf">Surf</option>
+                    <option value="mr. clean">Mr. Clean</option>
+                    <option value="ariel">Ariel</option>
+                    <option value="brasso">Brasso</option>
+                    <option value="domex">Domex</option>
+                    <option value="mr. muscle">Mr. Muscle</option>
+                    <option value="lysol">Lysol</option>
+                </select>
+            </div>
+            <div class="form-section">
+                <label for="quantity">Quantity:</label>
+                <input name="quantity" type="number" id="quantity" min="1" value="1">
+            </div>
+            <div class="form-section">
+                <label for="cost">Cost:</label>
+                <label id="cost-output"></label>
+            </div>
+            <button type="button">Calculate Cost</button>
+        </div>
+    </section>
+    <section class="card">
+        <h2>Find Cleaning Product By Surface</h2>
+        <div></div>
+    </section>
+    <section class="card">
+        <h2>Cleaning Staff Week Schedule</h2>
+        <div></div>
+    </section>
+</body>
+</html>
