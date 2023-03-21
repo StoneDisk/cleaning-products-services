@@ -54,21 +54,25 @@ function calculateTotalCostPerCleaningProduct(productBrandChoice, quantity) {
 }
 
 function getBrand() {
-    const brandName = window.prompt("Enter a house cleaning brand: ");
+    const brandSelectControlElement = document.querySelector("#brand-options");
+    const brandName = brandSelectControlElement.value;
     return brandName;
 }
 
 function getQuantity() {
-    const item_quantity = Number(window.prompt("Enter the quantity of your chosen brand: "));
+    const quantityInputControlElement = document.querySelector("#quantity");
+    const item_quantity = parseInt(quantityInputControlElement.value);
     return item_quantity;
 }
 
 function displayTotalCost() {
+    const costLabelControlElement = document.querySelector("#cost-output");
+
     const brand = getBrand();
     const quantity = getQuantity();
-    const totalCost = totalCostPerCleaningProduct(brand, quantity);
+    const totalCost = calculateTotalCostPerCleaningProduct(brand, quantity);
 
-    console.log(`The total cost of buying ${quantity} units of ${brand} is \u20B1${totalCost}`);
+    costLabelControlElement.textContent = `\u20B1${totalCost}`;
 }
 
 function filterCleaningProductsBySurface(surfaceType) {
@@ -443,4 +447,7 @@ function displaySingleWeekSchedule(cleaningPersonnelList) {
     }
 }
 
+const calculateCostButtonElement = document.querySelector("#calculate-cost");
+
+calculateCostButtonElement.addEventListener("click", displayTotalCost);
 
