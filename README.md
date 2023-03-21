@@ -1,2 +1,2 @@
-# cleaning-products-services
-A collection of simple console programs related to cleaning products and services 
+# Cleaning Products And Services App
+A collection of simple browser app related to cleaning products and services 
