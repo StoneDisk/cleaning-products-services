@@ -98,14 +98,20 @@ function filterCleaningProductsBySurface(surfaceType) {
     return matchedSurfaceCleaningProducts;
 }
 
-function displayCompatibleCleaningProducts() {
-    const surface = window.prompt("Enter the type of surface: ");
+function displayCompatibleCleaningProducts(surface) {
+    // const surface = window.prompt("Enter the type of surface: ");
     const compatibleProductsList = filterCleaningProductsBySurface(surface);
 
-    console.log("Here's a list of cleaning products compatible with " + surface + ": ");
+    /* console.log();
     compatibleProductsList.forEach(element => {
         console.log(`* ${element}`);
-    });
+    }); */
+    const productListOutputElement = document.querySelector("div#product-result");
+    const introParagraphElement = document.createElement("p");
+
+    introParagraphElement.textContent = "Here's a list of cleaning products compatible with " + surface + ": ";
+
+    productListOutputElement.append(introParagraphElement);
 }
 
 function assignTasksToCleaningStaff() {
@@ -448,6 +454,12 @@ function displaySingleWeekSchedule(cleaningPersonnelList) {
 }
 
 const calculateCostButtonElement = document.querySelector("#calculate-cost");
-
 calculateCostButtonElement.addEventListener("click", displayTotalCost);
 
+const surfaceTypeRadioInputElement = document.querySelectorAll("input[name='surface']");
+surfaceTypeRadioInputElement.forEach((surface) => {
+    surface.addEventListener("change", () => {
+        const surfaceType = surface.value;
+        displayCompatibleCleaningProducts(surfaceType);
+    });
+});
