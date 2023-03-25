@@ -99,19 +99,27 @@ function filterCleaningProductsBySurface(surfaceType) {
 }
 
 function displayCompatibleCleaningProducts(surface) {
-    // const surface = window.prompt("Enter the type of surface: ");
     const compatibleProductsList = filterCleaningProductsBySurface(surface);
 
-    /* console.log();
-    compatibleProductsList.forEach(element => {
-        console.log(`* ${element}`);
-    }); */
     const productListOutputElement = document.querySelector("div#product-result");
     const introParagraphElement = document.createElement("p");
+    const productUnorderedListElement = document.createElement("ul");
+    let productListItemElement = null;
+
+    while (productListOutputElement.firstChild) {
+        productListOutputElement.removeChild(productListOutputElement.firstChild);
+    }
+    
+    compatibleProductsList.forEach((compatibleProduct) => {
+        productListItemElement = document.createElement("li");
+        productListItemElement.textContent = compatibleProduct;
+        productUnorderedListElement.append(productListItemElement);
+    });
 
     introParagraphElement.textContent = "Here's a list of cleaning products compatible with " + surface + ": ";
 
     productListOutputElement.append(introParagraphElement);
+    productListOutputElement.append(productUnorderedListElement);
 }
 
 function assignTasksToCleaningStaff() {
