@@ -122,6 +122,8 @@ function displayCompatibleCleaningProducts(surface) {
     productListOutputElement.append(productUnorderedListElement);
 }
 
+// Returns an array of objects containing cleaning staff with the tasks
+// assigned to each based on their availability and equipment
 function assignTasksToCleaningStaff() {
     const cleaningStaff = [
         { 
@@ -430,13 +432,15 @@ function assignTasksToCleaningStaff() {
         }
     }
 
-    for (const staff of cleaningStaff) {
+    /* for (const staff of cleaningStaff) {
         console.log(staff);
-    }
+    } */
 
     return cleaningStaff;
 }
 
+// Displays a single week schedule to the console that includes the
+// cleaning personnel for each day of week from Monday to Sunday
 function displaySingleWeekSchedule(cleaningPersonnelList) {
     const daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday",
                         "Friday", "Saturday", "Sunday"];
@@ -461,6 +465,44 @@ function displaySingleWeekSchedule(cleaningPersonnelList) {
     }
 }
 
+// Browser GUI version of displaySingleWeekSchedule function
+function viewSingleWeekSchedule(cleaningPersonnelList) {
+    const daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday",
+                        "Friday", "Saturday", "Sunday"];
+    const scheduleOutputElement = document.querySelector("#schedule-output");
+    let dayHeadingsElement, cleaningPersonnelHeading = null;
+    let personnelList, personnelListItem = null;
+
+    for (let i = 0; i < daysOfWeek.length; i++) {
+        dayHeadingsElement = document.createElement("h3");
+        dayHeadingsElement.textContent = daysOfWeek[i];
+        scheduleOutputElement.appendChild(dayHeadingsElement);
+
+        cleaningPersonnelHeading = document.createElement("h4");
+        cleaningPersonnelHeading.textContent = "Cleaning Personnel:";
+        scheduleOutputElement.appendChild(cleaningPersonnelHeading);
+
+        personnelList = document.createElement("ul");
+
+        for (let index = 0; index < cleaningPersonnelList.length; index++) {
+            let match = 0;
+
+            for (let counter = 0; counter < cleaningPersonnelList[index].assignedTasks.length; counter++) {
+                if (cleaningPersonnelList[index].assignedTasks[counter].dayOfExecution === daysOfWeek[i]) {
+                    match += 1;
+                }
+            }
+            
+            if (match > 0) {
+                personnelListItem = document.createElement("li");
+                personnelListItem.textContent = cleaningPersonnelList[index].name;
+                personnelList.appendChild(personnelListItem);
+            }
+        }
+        scheduleOutputElement.appendChild(personnelList);
+    }
+}
+
 const calculateCostButtonElement = document.querySelector("#calculate-cost");
 calculateCostButtonElement.addEventListener("click", displayTotalCost);
 
@@ -470,4 +512,23 @@ surfaceTypeRadioInputElement.forEach((surface) => {
         const surfaceType = surface.value;
         displayCompatibleCleaningProducts(surfaceType);
     });
+});
+
+const showScheduleButtonElement = document.querySelector("#view-schedule");
+const hideScheduleButtonElement = document.querySelector("#hide-schedule");
+
+showScheduleButtonElement.addEventListener("click", () => {
+    const scheduleOutputElement = document.querySelector("#schedule-output");
+    scheduleOutputElement.style.display = "block";
+
+    while (scheduleOutputElement.firstChild) {
+        scheduleOutputElement.removeChild(scheduleOutputElement.firstChild);
+    }
+
+    viewSingleWeekSchedule(assignTasksToCleaningStaff());
+});
+
+hideScheduleButtonElement.addEventListener("click", () => {
+    document.querySelector("#schedule-output")
+    .style.display = "none";
 });
