@@ -1,0 +1,25 @@
+section {
+    margin: 0 auto;
+}
+
+section.card {
+    width: 500px;
+    margin-top: 2rem;
+    background-color: #E4FDE1;
+    border-radius: 5px;
+}
+
+h1 {
+    margin-bottom: 3rem;
+    color: #575761;
+    text-align: center;
+}
+
+button {
+    background-color: #DCE4E4;
+    padding: 6px;
+}
+
+#hide-schedule {
+    background-color: #FFEAC2;
+}
